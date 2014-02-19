@@ -103,7 +103,8 @@
     %\ifstrequal{#1}{first}{\mkbibordedition{1}}{%
     %  \ifstrequal{#1}{second}{\mkbibordedition{2}}{
     %    \ifstrequal{#1}{third}{\mkbibordedition{3}}{
-    \MakeCapital{#1}}%}}%
+    %\MakeCapital{#1}}%}}%
+    #1}%
 }
 \DeclareFieldFormat*{pages}{\mainsstring{pages}\space\printtext{#1}}
 \DeclareFieldFormat*{number}{\bibsstring{number}\addspace\printtext{#1}}
@@ -433,6 +434,40 @@
 \newunit\newblock
 \finentry}
 
+\DeclareBibliographyDriver{legislation}{%
+%\printnames{author}%
+\usebibmacro{bibindex}%
+\usebibmacro{begentry}%
+\usebibmacro{names:primary}
+\newunit\newblock
+\printfield{title}%
+\printfield[colon]{subtitle}%
+\newunit\newblock
+\usebibmacro{in}
+\usebibmacro{editor}%
+\newunit\newblock%
+\usebibmacro{pub:title}%
+\newunit\newblock
+\printfield{number}
+\newunit\newblock
+\usebibmacro{book:pubinfo}
+%\newunit\newblock
+\setunit*{\addcomma\addspace}
+\printfield{edition}
+\setunit*{\addcomma\addspace}
+\printfield{pages}
+%\usebibmacro{pagecount}
+\newunit\newblock
+\printfield{series}
+\newunit\newblock
+\printfield{note}
+\newunit\newblock
+\usebibmacro{availability}
+\newunit\newblock
+\printfield{isbn}
+\newunit\newblock
+\finentry}
+
 %\DeclareBibliographyAlias{online}{book}
 \DeclareBibliographyDriver{online}{%
 \usebibmacro{bibindex}%
@@ -472,6 +507,36 @@
 \DeclareBibliographyAlias{reference}{collection}
 \DeclareBibliographyAlias{inreference}{incollection}
 \DeclareBibliographyAlias{report}{book}
-\DeclareBibliographyAlias{thesis}{book}
+
+%\DeclareBibliographyAlias{thesis}{book}
+\DeclareBibliographyDriver{thesis}{%
+\usebibmacro{bibindex}%
+\usebibmacro{begentry}%
+%\printnames{author}%
+\usebibmacro{names:primary}
+\newunit\newblock
+\usebibmacro{pub:title}
+\newunit\newblock
+\usebibmacro{book:vol}
+\newunit\newblock
+\usebibmacro{book:pubinfo}
+\newunit\newblock
+\usebibmacro{pagecount}
+\newunit\newblock
+\printfield{series}
+\newunit\newblock
+\printfield{type}
+\newunit\newblock
+\printlist{institution}
+\newunit\newblock
+\printfield{note}
+\newunit\newblock
+\usebibmacro{availability}
+\newunit\newblock
+\printfield{isbn}
+\newunit\newblock
+\finentry}
+
+
 \DeclareBibliographyAlias{unpublished}{book}
 \endinput
