@@ -69,7 +69,7 @@
 \renewcommand\andmoredelim{}
 \renewcommand\multinamedelim{\addcomma\addspace}
 \renewcommand\mkbibnamelast[1]{\MakeUppercase{#1}}
-\renewcommand\finalnamedelim{\addspace{a}\addspace}
+\renewcommand\finalnamedelim{\addspace\bibstring{and}\addspace}
 \renewcommand\andothersdelim{\addspace}
 
 
@@ -131,15 +131,24 @@
 \DeclareFieldFormat{urldate}{\printfield{urlyear}\addhyphen\printfield{urlmonth}\addhyphen\printfield{urlday}}
 
 
-%\DeclareNameFormat{author}{%
-%\ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}>1}
-%{\MakeUppercase{#1}%
-%\ifblank{#3}{}{\addcomma\space #4}}
-%{\ifblank{#3}{}{#3\space}%
-%#1}%
-%\ifthenelse{\value{listcount}<\value{liststop}}
-%{\addcomma\space}
-%{}}
+% #1 prijmeni, #2 iniciala prijmeni, #3 jmeno, #4 iniciala jmena
+% jeden autor PRIJMENI, Jmeno
+% dva autori PRIJMENI, Jmeno a Jmeno2 PRIJMENI2
+% tri autori PRIJMENI, J., J. PRIJMENI a J.PRIJMENI
+\DeclareNameFormat{author}{%
+    \ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}<3}%
+    {\MakeUppercase{#1}\ifblank{#3}{}{\addcomma\space#3}}{}%
+    \ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}>2}%
+        {\MakeUppercase{#1}\ifblank{#3}{}{\addcomma\space#4}}{}%
+    \ifthenelse{\value{listcount}>\value{liststart}\AND\value{listtotal}<3}%
+        {\ifblank{#3}{}{#3\space}\MakeUppercase{#1}}{}%
+    \ifthenelse{\value{listcount}>\value{liststart}\AND\value{listtotal}>2}%
+        {\ifblank{#3}{}{#4\space}\MakeUppercase{#1}}{}%
+        \ifnumcomp{\value{listcount}}{<}{\value{liststop}-1}%
+        {\multinamedelim}{}%
+        \ifnumcomp{\value{listcount}}{=}{\value{liststop}-1}%
+    {\finalnamedelim}{}%
+}%
 
 \DeclareNameAlias{default}{last-first}
 
