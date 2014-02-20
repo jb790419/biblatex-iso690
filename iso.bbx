@@ -150,6 +150,10 @@
     {\finalnamedelim}{}%
 }%
 
+\DeclareNameFormat{translator}{%
+    #3\addspace#1%
+}%
+
 \DeclareNameAlias{default}{last-first}
 
 \newbibmacro*{book:pubinfo}{%
@@ -299,6 +303,17 @@
 %\newbibmacro{loc:bookvol}{\addnbspace\bibsstring{edition}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newbibmacro{book:translator}{%
+    \iffieldundef{usera}{}{%
+        \printfield{usera}%
+    }%
+}%
+
+\newbibmacro{book:ilustrator}{%
+    \iffieldundef{userb}{}{%
+        \printfield{userb}%
+    }%
+}%
 
 \DeclareBibliographyDriver{book}{%
 \usebibmacro{bibindex}%
@@ -309,6 +324,10 @@
 \usebibmacro{pub:title}
 \newunit\newblock
 \usebibmacro{book:vol}
+\newunit\newblock
+\usebibmacro{book:translator}
+\newunit\newblock
+\usebibmacro{book:ilustrator}
 \newunit\newblock
 \usebibmacro{book:pubinfo}
 \newunit\newblock
