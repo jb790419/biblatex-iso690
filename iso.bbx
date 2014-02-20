@@ -67,9 +67,9 @@
 
 \renewcommand\subtitlepunct{\tcolon}
 \renewcommand\andmoredelim{}
-\renewcommand\multinamedelim{\addsemicolon\addspace}
+\renewcommand\multinamedelim{\addcomma\addspace}
 \renewcommand\mkbibnamelast[1]{\MakeUppercase{#1}}
-\renewcommand\finalnamedelim{\multinamedelim}
+\renewcommand\finalnamedelim{\addspace{a}\addspace}
 \renewcommand\andothersdelim{\addspace}
 
 
@@ -131,13 +131,15 @@
 \DeclareFieldFormat{urldate}{\printfield{urlyear}\addhyphen\printfield{urlmonth}\addhyphen\printfield{urlday}}
 
 
-%\DeclareNameFormat{default}{%
-%\nameprint{#1}{#3}
-%\usebibmacro{names:iso}{#1}{#2}{#3}{#4}%
-%\usebibmacro{names:separator}%
-%\usebibmacro{names:andothers}%
-%\ifthenelse{\value{listcount}>\value{maxnames}}{\addspace\printtext{a další}}{oii}%
-%}
+%\DeclareNameFormat{author}{%
+%\ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}>1}
+%{\MakeUppercase{#1}%
+%\ifblank{#3}{}{\addcomma\space #4}}
+%{\ifblank{#3}{}{#3\space}%
+%#1}%
+%\ifthenelse{\value{listcount}<\value{liststop}}
+%{\addcomma\space}
+%{}}
 
 \DeclareNameAlias{default}{last-first}
 
