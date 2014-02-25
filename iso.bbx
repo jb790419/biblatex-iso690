@@ -116,6 +116,7 @@
 \DeclareFieldFormat{rbrackets}{$\langle$#1$\rangle$}
 \DeclareFieldFormat{colon}{\printtext{\tcolon}\addspace#1}
 \DeclareFieldFormat{emph-colon}{\printtext[emphatize]{\printtext[colon]{#1}}}
+\DeclareFieldFormat{capitalize}{\MakeCapital{#1}}
 
 %We must handle more than one isbn and issn
 \DeclareFieldFormat{isbn}{%
@@ -270,7 +271,8 @@
 \newbibmacro{titles}[1]{%
   \printfield[emphatize]{#1title}%
   \printfield[emph-colon]{#1subtitle}%
-  \printfield[emphatize]{#1addon}%
+  \newunit\newblock%
+  \printfield[capitalize]{#1titleaddon}%
 }
 \newbibmacro{pub:title}{%
  \iffieldundef{maintitle}{%
