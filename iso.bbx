@@ -66,6 +66,7 @@
 }%
 
 \renewcommand\subtitlepunct{\tcolon}
+\renewcommand\intitlepunct{\tcolon}
 \renewcommand\andmoredelim{}
 \renewcommand\multinamedelim{\addcomma\addspace}
 \renewcommand\mkbibnamelast[1]{\MakeUppercase{#1}}
@@ -116,7 +117,7 @@
 \DeclareFieldFormat{rbrackets}{$\langle$#1$\rangle$}
 \DeclareFieldFormat{colon}{\printtext{\tcolon}\addspace#1}
 \DeclareFieldFormat{emph-colon}{\printtext[emphatize]{\printtext[colon]{#1}}}
-\DeclareFieldFormat{capitalize}{\MakeCapital{#1}}
+\DeclareFieldFormat{capitalize}{\adddot\addspace\MakeCapital{#1}}
 
 %We must handle more than one isbn and issn
 \DeclareFieldFormat{isbn}{%
@@ -271,7 +272,6 @@
 \newbibmacro{titles}[1]{%
   \printfield[emphatize]{#1title}%
   \printfield[emph-colon]{#1subtitle}%
-  \newunit\newblock%
   \printfield[capitalize]{#1titleaddon}%
 }
 \newbibmacro{pub:title}{%
@@ -439,7 +439,8 @@
 \printfield{title}%
 \printfield[colon]{subtitle}%
 \newunit\newblock
-\usebibmacro{in}
+\usebibmacro{in}%
+\intitlepunct%
 \usebibmacro{editor}%
 \newunit\newblock%
 \usebibmacro{pub:title}%
@@ -473,7 +474,8 @@
 \printfield{title}%
 \printfield[colon]{subtitle}%
 \newunit\newblock
-\usebibmacro{in}
+\usebibmacro{in}%
+\intitlepunct%
 \usebibmacro{editor}%
 \newunit\newblock%
 \usebibmacro{pub:title}%
