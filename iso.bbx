@@ -137,6 +137,7 @@
 % jeden autor PRIJMENI, Jmeno
 % dva autori PRIJMENI, Jmeno a Jmeno2 PRIJMENI2
 % tri autori PRIJMENI, J., J. PRIJMENI a J.PRIJMENI
+% @todo vice nez tri PRIJMENI, J. et al.
 \DeclareNameFormat{author}{%
     \ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}<3}%
     {\MakeUppercase{#1}\ifblank{#3}{}{\addcomma\space#3}}{}%
