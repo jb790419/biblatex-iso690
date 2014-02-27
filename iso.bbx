@@ -34,8 +34,8 @@
 \ExecuteBibliographyOptions{%
   %spacecolon=true
    %sorting=nyt
-  ,maxnames=5
-  ,minnames=3
+  ,maxnames=3
+  ,minnames=1
   ,babel=other
   %,method=authoryear
   ,urldate=iso8601
@@ -67,11 +67,9 @@
 
 \renewcommand\subtitlepunct{\tcolon}
 \renewcommand\intitlepunct{\tcolon}
-\renewcommand\andmoredelim{}
 \renewcommand\multinamedelim{\addcomma\addspace}
 \renewcommand\mkbibnamelast[1]{\MakeUppercase{#1}}
 \renewcommand\finalnamedelim{\addspace\bibstring{and}\addspace}
-\renewcommand\andothersdelim{\bibstring{andothers}}
 
 
 \defbibenvironment{bibliography}
@@ -132,30 +130,7 @@
 \def\addhyphen{\printtext{-}}
 \DeclareFieldFormat{urldate}{\printfield{urlyear}\addhyphen\printfield{urlmonth}\addhyphen\printfield{urlday}}
 
-
-% #1 prijmeni, #2 iniciala prijmeni, #3 jmeno, #4 iniciala jmena
-% jeden autor PRIJMENI, Jmeno
-% dva autori PRIJMENI, Jmeno a Jmeno2 PRIJMENI2
-% tri autori PRIJMENI, J., J. PRIJMENI a J.PRIJMENI
-% @todo vice nez tri PRIJMENI, J. et al.
-\DeclareNameFormat{author}{%
-    \ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}<3}%
-    {\MakeUppercase{#1}\ifblank{#3}{}{\addcomma\space#3}}{}%
-    \ifthenelse{\value{listcount}=\value{liststart}\AND\value{listtotal}>2}%
-        {\MakeUppercase{#1}\ifblank{#3}{}{\addcomma\space#4}}{}%
-    \ifthenelse{\value{listcount}>\value{liststart}\AND\value{listtotal}<3}%
-        {\ifblank{#3}{}{#3\space}\MakeUppercase{#1}}{}%
-    \ifthenelse{\value{listcount}>\value{liststart}\AND\value{listtotal}>2}%
-        {\ifblank{#3}{}{#4\space}\MakeUppercase{#1}}{}%
-    \ifnumcomp{\value{listcount}}{<}{\value{liststop}-1}%
-        {\multinamedelim}{}%
-    \ifnumcomp{\value{listcount}}{=}{\value{liststop}-1}%
-    {\ifmorenames{\multinamedelim}{\finalnamedelim}}{}%
-    \ifnumcomp{\value{listcount}}{=}{\value{liststop}}%
-    {\ifmorenames{\space\andothersdelim}{}}{}%
-}%
-
-\DeclareNameAlias{default}{last-first}
+\DeclareNameAlias{default}{last-first/first-last}
 
 \newbibmacro*{book:pubinfo}{%
   %\iflistundef{location}{\printtext[colon]{\printlist{publisher}}}{%
